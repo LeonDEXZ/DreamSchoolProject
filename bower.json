@@ -19,6 +19,8 @@
   "dependencies": {
     "jquery": "^2.2.2",
     "font-awesome": "^4.5.0",
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "superfish": "^1.7.8",
+    "owl.carousel": "owl-carousel2#^2.0.0-beta.3"
   }
 }

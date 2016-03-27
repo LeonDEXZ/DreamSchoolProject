@@ -1,0 +1,130 @@
+@import "bourbon"
+@import "vars.sass"
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.6
+	font-family: "RobotoRegular", sans-serif
+	overflow-x: hidden
+	color: #fff
+	background-color: #000
+
+a
+	text-decoration: none
+
+strong, b
+	font-family: "RobotoBold", sane-sarif
+	font-weight: normal
+
+h1, h2, h3, h4, h5, h6, .button
+	font-family: "RobotoCondensedBold", sane-sarif
+	font-weight: normal
+	text-transform: uppercase
+
+.hidden
+	display: none
+
+.main_page
+	border-top: 9px solid $acce_color
+	border-bottom: 9px solid $acce_color
+	background-color: $main_color
+
+.vcenter
+    display: inline-block
+    vertical-align: middle
+    float: none
+
+.message
+ 	padding: 10px
+ 	margin: 10px 0
+.error
+	border: 2px solid $error_color
+	background-color: darken($error_color, 30%)
+	color: $error_color
+.warning
+	border: 2px solid $warning_color
+	background-color: darken($warning_color, 30%)
+	color: $warning_color
+.normal
+	border: 2px solid $normal_color
+	background-color: darken($normal_color, 30%)
+	color: $normal_color
+
+header
+	.top-loginbar
+		background-color: $main_color
+		padding: 3px
+		&-socref
+			font-size: 18px
+			padding: 5px
+			div
+				padding: 1px 7px
+				color: $acce_color
+				display: inline-block
+			.vk
+				border: 2px solid #45668e
+				a
+					color: #45668e			
+			.youtube
+				border: 2px solid #cd201f
+				a
+					color: #cd201f			
+			.twitch
+				border: 2px solid #6441a5
+				a
+					color: #6441a5			
+			.twitter
+				border: 2px solid #55acee
+				a
+					color: #55acee
+		&-loginbar
+			margin-top: 7px
+			text-align: center
+	.top-menubar
+		background-color: lighten($main_color, 5%)
+		&-img
+			text-align: center
+			padding: 15px 0
+		&-text
+			margin-left: -28px
+			h1
+				font-family: "Molot", sans-serif
+				font-size: 52px
+				line-height: 42px
+
+		&-menu
+			margin-top: 38px
+
+.sf-menu
+	font-size: 18px
+	.top-arrow
+		font-size: 29px
+		margin-left: 8px
+		margin-top: -5px
+	ul
+		margin-top: 3px
+		li
+			background-color: lighten($main_color, 5%)
+	li
+		background-color: lighten($main_color, 5%)
+		border-bottom: 3px solid lighten($main_color, 5%)
+		transition none
+	li:hover
+		background-color: lighten($main_color, 5%)
+		border-bottom: 3px solid $acce_color
+	a
+		border: none
+		color: #fff
+		font-family: "RobotoCondensedRegular", sane-sarif
+
+.slader
+	
+
+footer
+	text-align: center
+	font-size: 18px
+	padding: 25px
+	span
+		font-family: "RobotoCondensedBold", sane-sarif
