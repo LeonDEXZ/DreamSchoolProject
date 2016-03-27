@@ -8,86 +8,95 @@ var gulp			= require('gulp'),
 	browserSync		= require('browser-sync').create(),
 	autoprefixer 	= require('gulp-autoprefixer');
 
-var baseDir = "app",
-	distDir = "build";
+var DEXbaseDir = "app",
+	DEXdistDir = "build";
 
 gulp.task('styles', function() {
-	return gulp.src(baseDir + '/sass/*.sass')
+	return gulp.src(DEXbaseDir + '/sass/*.sass')
 		.pipe(sass({
 			includePaths: require('node-bourbon').includePaths
 		}).on('error', sass.logError))
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(autoprefixer({browsers: ['last 15 versions'], cascade: false}))
 		// .pipe(cleanCSS())
-		.pipe(gulp.dest(baseDir + '/css'))
+		.pipe(gulp.dest(DEXbaseDir + '/css'))
 		.pipe(browserSync.stream());
 });
 
 gulp.task('libs-i', function() {
 	 // font-awesome
-	 //gulp.src(baseDir + '/libs/font-awesome/scss/*.scss')
-	 //	.pipe(gulp.dest(baseDir + '/sass/font-awesome'));
+	 //gulp.src(DEXbaseDir + '/libs/font-awesome/scss/*.scss')
+	 //	.pipe(gulp.dest(DEXbaseDir + '/sass/font-awesome'));
 
-	gulp.src(baseDir + '/libs/font-awesome/fonts/*.*')
-		.pipe(gulp.dest(baseDir + '/fonts'));
+	gulp.src(DEXbaseDir + '/libs/font-awesome/fonts/*.*')
+		.pipe(gulp.dest(DEXbaseDir + '/fonts'));
 
 	// bootstrap
-	gulp.src(baseDir + '/libs/bootstrap/dist/css/bootstrap.min.css')
-		.pipe(gulp.dest(baseDir + '/css'));
+	gulp.src(DEXbaseDir + '/libs/bootstrap/dist/css/bootstrap.min.css')
+		.pipe(gulp.dest(DEXbaseDir + '/css'));
 
 	// superfish
-	// gulp.src(baseDir + '/libs/superfish/dist/css/superfish.css')
+	// gulp.src(DEXbaseDir + '/libs/superfish/dist/css/superfish.css')
 	// 	.pipe(cleanCSS())
 	// 	.pipe(rename({suffix: '.min', prefix : ''}))
-	// 	.pipe(gulp.dest(baseDir + '/css'));
+	// 	.pipe(gulp.dest(DEXbaseDir + '/css'));
 });
 
 gulp.task('scripts', function() {
 	return gulp.src([
-			baseDir + '/libs/jquery/dist/jquery.min.js',
-			baseDir + '/libs/bootstrap/dist/js/bootstrap.min.js',
-			baseDir + '/libs/superfish/dist/js/superfish.min.js'
+			DEXbaseDir + '/libs/jquery/dist/jquery.min.js',
+			DEXbaseDir + '/libs/bootstrap/dist/js/bootstrap.min.js',
+			DEXbaseDir + '/libs/superfish/dist/js/superfish.min.js',
+			DEXbaseDir + '/libs/owl.carousel/dist/owl.carousel.min.js'
 		])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())
-		.pipe(gulp.dest(baseDir + '/js'));
+		.pipe(gulp.dest(DEXbaseDir + '/js'));
 });
 
 gulp.task('browser-sync', ['styles', 'scripts'], function() {
 	browserSync.init({
 		server: {
-			baseDir: baseDir
+			baseDir: DEXbaseDir
 		},
 		notify: false
 	});
 });
 
 gulp.task('watch', function() {
-	gulp.watch(baseDir + '/sass/*.sass', ['styles']);
-	gulp.watch(baseDir + '/libs/**/*.js', ['scripts']);
-	gulp.watch(baseDir + '/js/*.js').on("change", browserSync.reload);
-	gulp.watch(baseDir + '/*.html').on('change', browserSync.reload);
+	gulp.watch(DEXbaseDir + '/sass/*.sass', ['styles']);
+	gulp.watch(DEXbaseDir + '/libs/**/*.js', ['scripts']);
+	gulp.watch(DEXbaseDir + '/js/*.js').on("change", browserSync.reload);
+	gulp.watch(DEXbaseDir + '/*.html').on('change', browserSync.reload);
 });
 
 gulp.task('clean', function() {
 	del([
-		distDir + '/css/*.css',
-		distDir + '/index.html',
-		distDir + '/js/*.js'
+		DEXdistDir + "/css",
+		DEXdistDir + '/index.html',
+		DEXdistDir + '/js',
+		DEXdistDir + '/fonts',
+		DEXdistDir + '/images',
+		DEXdistDir + '/build.zip'
 	]);
 });
 
 // TODO 
-gulp.task('build', ['clean', 'styles', 'scripts'], function() {
+gulp.task('build', ['clean', 'libs-i', 'styles', 'scripts'], function() {
+	gulp.src(DEXbaseDir + '/*.html')
+		.pipe(gulp.dest(DEXdistDir));
 
-	gulp.src(baseDir + '/css/*.css')
-		.pipe(gulp.dest(distDir + '/css'));
+	gulp.src(DEXbaseDir + '/css/**/*')
+		.pipe(gulp.dest(DEXdistDir + '/css'));
 
-	gulp.src(baseDir + '/*.html')
-		.pipe(gulp.dest(distDir));
+	gulp.src(DEXbaseDir + '/js/**/*')
+		.pipe(gulp.dest(DEXdistDir + '/js'));
 
-	gulp.src(baseDir + '/js/*.js')
-		.pipe(gulp.dest(distDir + '/js'));	
+	gulp.src(DEXbaseDir + '/images/**/*')
+		.pipe(gulp.dest(DEXdistDir + '/images'));
+
+	gulp.src(DEXbaseDir + '/fonts/**/*')
+		.pipe(gulp.dest(DEXdistDir + '/fonts'));
 });
 
 gulp.task('default', ['libs-i', 'browser-sync', 'watch']);
