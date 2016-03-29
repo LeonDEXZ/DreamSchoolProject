@@ -7,20 +7,23 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+	<style>.preloader{position: fixed;z-index:99;top:0;left:0;width:100%;height:100%;background:#191919 url(../images/preload.gif) center no-repeat;}</style>
 	
 	<script>!function(e){"use strict";function t(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function n(t,n){return e.localStorage&&localStorage[t+"_content"]&&localStorage[t+"_file"]===n}function a(t,a){if(e.localStorage&&e.XMLHttpRequest)n(t,a)?o(localStorage[t+"_content"]):l(t,a);else{var s=r.createElement("link");s.href=a,s.id=t,s.rel="stylesheet",s.type="text/css",r.getElementsByTagName("head")[0].appendChild(s),r.cookie=t}}function l(e,t){var n=new XMLHttpRequest;n.open("GET",t,!0),n.onreadystatechange=function(){4===n.readyState&&200===n.status&&(o(n.responseText),localStorage[e+"_content"]=n.responseText,localStorage[e+"_file"]=t)},n.send()}function o(e){var t=r.createElement("style");t.setAttribute("type","text/css"),r.getElementsByTagName("head")[0].appendChild(t),t.styleSheet?t.styleSheet.cssText=e:t.innerHTML=e}var r=e.document;e.loadCSS=function(e,t,n){var a,l=r.createElement("link");if(t)a=t;else{var o;o=r.querySelectorAll?r.querySelectorAll("style,link[rel=stylesheet],script"):(r.body||r.getElementsByTagName("head")[0]).childNodes,a=o[o.length-1]}var s=r.styleSheets;l.rel="stylesheet",l.href=e,l.media="only x",a.parentNode.insertBefore(l,t?a:a.nextSibling);var c=function(e){for(var t=l.href,n=s.length;n--;)if(s[n].href===t)return e();setTimeout(function(){c(e)})};return l.onloadcssdefined=c,c(function(){l.media=n||"all"}),l},e.loadLocalStorageCSS=function(l,o){n(l,o)||r.cookie.indexOf(l)>-1?a(l,o):t(e,"load",function(){a(l,o)})}}(this);</script>
 
-	<script>loadLocalStorageCSS( "webfonts", "css/fonts.min.css" );</script>
 	<script>loadCSS( "css/main.min.css", false, "all" );</script>
+	<script>loadLocalStorageCSS( "webfonts", "css/fonts.min.css" );</script>
 	<script>loadCSS( "css/header.min.css", false, "all" );</script>
 
 	<noscript>
 		<link rel="stylesheet" href="css/fonts.min.css">
 		<link rel="stylesheet" href="css/main.min.css">
+		<link rel="stylesheet" href="css/header.min.css">
 	</noscript>
 </head>
 <body>
+	<div class="preloader"></div>
 	<div class="container main_page">
 		<header>
 			<div class="row top-loginbar">
@@ -86,59 +89,114 @@
 				</div>
 			</div>
 		</header>
+		<section class="row slider">
+			<div class="owl-carousel">
+				<div class="item">
+					<h3>Загаловок</h3>
+					<a href="">				
+						<img class="slid-bg" src="images/slid-1.jpg" alt="">
+					</a>
+				</div>
+				<div class="item">
+					<h3>Загаловок</h3>
+					<a href="">				
+						<img class="slid-bg" src="images/slid-2.jpg" alt="">
+					</a>				
+				</div>
+				<div class="item">
+					<h3>Загаловок</h3>
+					<a href="">						
+						<img class="slid-bg" src="images/slid-3.jpg" alt="">
+					</a>				
+				</div>
+			</div>
+			<div class="owl-controls"></div>
+		</section>
+		<div class="row button-bar">
+			<div class="main-button">Обучение</div>
+			<div class="main-button">Школа коментаторов</div>
+			<div class="main-button">Менеджер для вашей команды</div>
+			<div class="main-button">Буст ММР</div>
+		</div>
 		<!-- System message box -->
 		<section id='message-box'>
 			<!-- <div class="message error">error</div>
 			<div class="message warning">warning</div>
 			<div class="message normal">normal</div> -->
 		</section>
-		<section class="slider">
-			<div class="owl-carousel">
-			  <div>
-			  	
-			  </div>
-			  <div> Your Content </div>
-			  <div> Your Content </div>
-			  <div> Your Content </div>
-			  <div> Your Content </div>
-			  <div> Your Content </div>
-			  <div> Your Content </div>
+		<section class="row info-boxs">
+			<div class="col-md-6 info-box">
+				<div class="info-box-title">Блог</div>
+				<div class="blog-content nano">
+					<div class="nano-content">
+						<div class="blog">
+							<h4 class="blog-title">Name blog</h4>
+							<div class="blog-minitext">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, doloremque, facilis! Maiores eum sunt, consequuntur, quae deserunt vero inventore, molestias necessitatibus minus amet ducimus nulla quasi voluptates nobis nisi unde?
+							</div>
+							<a href="" class="pull-right">Читать далее...</a>
+						</div>
+						<div class="blog">
+							<h4 class="blog-title">Name blog</h4>
+							<div class="blog-minitext">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, doloremque, facilis! Maiores eum sunt, consequuntur, quae deserunt vero inventore, molestias necessitatibus minus amet ducimus nulla quasi voluptates nobis nisi unde?
+							</div>
+							<a href="" class="pull-right">Читать далее...</a>
+						</div>
+						<div class="blog">
+							<h4 class="blog-title">Name blog</h4>
+							<div class="blog-minitext">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, doloremque, facilis! Maiores eum sunt, consequuntur, quae deserunt vero inventore, molestias necessitatibus minus amet ducimus nulla quasi voluptates nobis nisi unde?
+							</div>
+							<a href="" class="pull-right">Читать далее...</a>
+						</div>
+						<div class="blog">
+							<h4 class="blog-title">Name blog</h4>
+							<div class="blog-minitext">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, doloremque, facilis! Maiores eum sunt, consequuntur, quae deserunt vero inventore, molestias necessitatibus minus amet ducimus nulla quasi voluptates nobis nisi unde?
+							</div>
+							<a href="" class="pull-right">Читать далее...</a>
+						</div>
+						<div class="blog">
+							<h4 class="blog-title">Name blog</h4>
+							<div class="blog-minitext">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam, doloremque, facilis! Maiores eum sunt, consequuntur, quae deserunt vero inventore, molestias necessitatibus minus amet ducimus nulla quasi voluptates nobis nisi unde?
+							</div>
+							<a href="" class="pull-right">Читать далее...</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 info-box">
+				<div class="info-box-title">Клозы</div>
+				<div class="blog-content nano">
+					<div class="nano-content">
+						
+					</div>
+				</div>
 			</div>
 		</section>
-		<div class="row">
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-			<div class="col-md-1">.col-md-1</div>
-		</div>
-		<div class="row">
-			<div class="col-md-8">.col-md-8</div>
-			<div class="col-md-4">.col-md-4</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">.col-md-4</div>
-			<div class="col-md-4">.col-md-4</div>
-			<div class="col-md-4">.col-md-4</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">.col-md-6</div>
-			<div class="col-md-6">.col-md-6</div>
-		</div>
+		<section class="row info-boxs">
+			<div class="col-md-6 info-box">
+				<div class="info-box-title">Матчи</div>
+				<div class="blog-content nano">
+					<div class="nano-content">
 
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 info-box">
+				<div class="info-box-title">Видео</div>
+				<div class="blog-content nano">
+					<div class="nano-content">
+						
+					</div>
+				</div>
+			</div>
+		</section>
 		<footer>
 			Code by <span>DEX</span>
 		</footer>
-
-		<div class="hidden"></div>
-
 		<!-- Load Scripts Start -->
 		<script>var scr = {"scripts":[
 			{"src" : "js/libs.min.js", "async" : false},

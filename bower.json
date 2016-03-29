@@ -21,6 +21,9 @@
     "font-awesome": "^4.5.0",
     "bootstrap": "^3.3.6",
     "superfish": "^1.7.8",
-    "owl.carousel": "owl-carousel2#^2.0.0-beta.3"
+    "owl.carousel": "owl-carousel2#^2.0.0-beta.3",
+    "animated": "^1.0.2",
+    "jQuery.mmenu": "mmenu#^5.6.3",
+    "nanoscroller": "^0.8.7"
   }
 }

@@ -6,22 +6,13 @@ var gulp			= require('gulp'),
 	uglify			= require('gulp-uglify'),
 	sass			= require('gulp-sass'),
 	browserSync		= require('browser-sync').create(),
-	autoprefixer 	= require('gulp-autoprefixer');
+	autoprefixer 	= require('gulp-autoprefixer'),
+	cache 			= require('gulp-cache'),
+	imagemin 		= require('gulp-imagemin'),
+	pngquant 		= require('imagemin-pngquant');
 
 var DEXbaseDir = "app",
 	DEXdistDir = "build";
-
-gulp.task('styles', function() {
-	return gulp.src(DEXbaseDir + '/sass/*.sass')
-		.pipe(sass({
-			includePaths: require('node-bourbon').includePaths
-		}).on('error', sass.logError))
-		.pipe(rename({suffix: '.min', prefix : ''}))
-		.pipe(autoprefixer({browsers: ['last 15 versions'], cascade: false}))
-		// .pipe(cleanCSS())
-		.pipe(gulp.dest(DEXbaseDir + '/css'))
-		.pipe(browserSync.stream());
-});
 
 gulp.task('libs-i', function() {
 	 // font-awesome
@@ -42,19 +33,43 @@ gulp.task('libs-i', function() {
 	// 	.pipe(gulp.dest(DEXbaseDir + '/css'));
 });
 
+gulp.task('styles', function() {
+	return gulp.src(DEXbaseDir + '/sass/*.sass')
+		.pipe(sass({
+			includePaths: require('node-bourbon').includePaths
+		}).on('error', sass.logError))
+		.pipe(rename({suffix: '.min', prefix : ''}))
+		.pipe(autoprefixer({browsers: ['last 15 versions'], cascade: false}))
+		//.pipe(cleanCSS())
+		.pipe(gulp.dest(DEXbaseDir + '/css'))
+		.pipe(browserSync.stream());
+});
+
 gulp.task('scripts', function() {
 	return gulp.src([
 			DEXbaseDir + '/libs/jquery/dist/jquery.min.js',
 			DEXbaseDir + '/libs/bootstrap/dist/js/bootstrap.min.js',
 			DEXbaseDir + '/libs/superfish/dist/js/superfish.min.js',
-			DEXbaseDir + '/libs/owl.carousel/dist/owl.carousel.min.js'
+			DEXbaseDir + '/libs/owl.carousel/dist/owl.carousel.min.js',
+			DEXbaseDir + '/libs/nanoscroller/bin/javascripts/jquery.nanoscroller.min.js'
 		])
 		.pipe(concat('libs.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest(DEXbaseDir + '/js'));
 });
 
-gulp.task('browser-sync', ['styles', 'scripts'], function() {
+gulp.task('images', function() {
+	return gulp.src(DEXbaseDir + '/img_no_optimiz/**/*')
+		.pipe(cache(imagemin({
+			interlaced: true,
+			progressive: true,
+			svgoPlugins: [{removeViewBox: false}],
+			use: [pngquant()]
+		})))
+		.pipe(gulp.dest(DEXbaseDir + '/images'));
+});
+
+gulp.task('browser-sync', ['images', 'styles', 'scripts'], function() {
 	browserSync.init({
 		server: {
 			baseDir: DEXbaseDir
@@ -65,9 +80,17 @@ gulp.task('browser-sync', ['styles', 'scripts'], function() {
 
 gulp.task('watch', function() {
 	gulp.watch(DEXbaseDir + '/sass/*.sass', ['styles']);
+
 	gulp.watch(DEXbaseDir + '/libs/**/*.js', ['scripts']);
-	gulp.watch(DEXbaseDir + '/js/*.js').on("change", browserSync.reload);
-	gulp.watch(DEXbaseDir + '/*.html').on('change', browserSync.reload);
+
+	gulp.watch(DEXbaseDir + '/img_no_optimiz/**/*', ['images'])
+		.on('change', browserSync.reload);
+
+	gulp.watch(DEXbaseDir + '/js/*.js')
+		.on("change", browserSync.reload);
+
+	gulp.watch(DEXbaseDir + '/*.html')
+		.on('change', browserSync.reload);
 });
 
 gulp.task('clean', function() {
@@ -82,7 +105,7 @@ gulp.task('clean', function() {
 });
 
 // TODO 
-gulp.task('build', ['clean', 'libs-i', 'styles', 'scripts'], function() {
+gulp.task('build', ['clean', 'libs-i', 'images', 'styles', 'scripts'], function() {
 	gulp.src(DEXbaseDir + '/*.html')
 		.pipe(gulp.dest(DEXdistDir));
 

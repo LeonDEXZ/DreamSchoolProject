@@ -4,6 +4,12 @@ build
 #libs
 app/libs
 
+# css folder
+app/css
+
+# images folder
+app/images
+
 # Bower Components
 bower_components
 
