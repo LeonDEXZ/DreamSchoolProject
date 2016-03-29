@@ -3,6 +3,7 @@ build
 
 #libs
 app/libs
+app/js/libs.min.js
 
 # css folder
 app/css
