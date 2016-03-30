@@ -1,0 +1,10 @@
+[!STYLE
+#idd {
+	color: #fff;
+}
+!]
+[!CONTENT
+<div id="idd">
+	<textarea id="editor"></textarea>
+</div>
+!]

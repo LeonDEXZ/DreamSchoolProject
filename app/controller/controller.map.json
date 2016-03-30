@@ -1,0 +1,10 @@
+{
+	"ez": {
+		"class_name": "DEXEZController",
+		"file_name": "dex.EZController.php"
+	},
+	"dreamschool": {
+		"class_name": "DSDefController",
+		"file_name": "DSDefController.php"
+	}
+}

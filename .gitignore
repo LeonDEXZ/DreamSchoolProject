@@ -8,9 +8,6 @@ app/js/libs.min.js
 # css folder
 app/css
 
-# images folder
-app/images
-
 # Bower Components
 bower_components
 

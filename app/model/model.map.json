@@ -1,0 +1,18 @@
+{
+	"auth": {
+		"class_name": "DEXAuthModel",
+		"file_name": "dex.auth.php"
+	},
+	"news": {
+		"class_name": "DEXNewsModel",
+		"file_name": "dex.news.php"
+	},
+	"file_system": {
+		"class_name": "DEXFileSystemModel",
+		"file_name": "dex.file_ssystem.php"
+	},
+	"index": {
+		"class_name": "DEXIndexModel",
+		"file_name": "dex.index.php"
+	}
+}

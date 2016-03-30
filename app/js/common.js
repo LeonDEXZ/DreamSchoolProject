@@ -38,4 +38,6 @@ $(function() {
 	$("img, a").on("dragstart", function(event) { event.preventDefault(); });
 
 	$(".preloader").fadeOut();
+
+	$(document).pjax('a', '#pjax-container');
 });
