@@ -26,5 +26,8 @@
     "jQuery.mmenu": "mmenu#^5.6.3",
     "nanoscroller": "^0.8.7",
     "jquery-pjax": "^1.9.6"
+  },
+  "devDependencies": {
+    "magnific-popup": "^1.1.0"
   }
 }

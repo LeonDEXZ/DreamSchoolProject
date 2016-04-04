@@ -7,24 +7,15 @@
  * License: GNU General Public License
  */
 
-if (version_compare(PHP_VERSION, '5.4.0', '<'))
-{
-	die('Your host needs to use PHP 5.4.0 or higher to run this version site');
-}
-
 //Var
 $_GMessages = array();
 $_GText = array();
 $_GLang = array();
 $_GDB = null;
-$_GQuerys = array();
 $_GDefController  = null;
 $_GACO  = null;
 
-define('DEX_DEBUG', true);
-
 define('DEX_INDEX', true);
-// define('DEX_BASE_PATH', str_replace('\\', '/', dirname(__FILE__)) . '/');
 define('DEX_BASE_PATH', '');
 define('DEX_CORE_PATH', DEX_BASE_PATH . 'core/');
 
@@ -57,12 +48,6 @@ $_GDefController = LoadClass(
 	DEX_CONTROLLER_PATH
 );
 
-// init querys
-if (isset($_GET['redirect']))
-{
-	exit;
-}
-
 if (isset($_GET['controller']))
 {
 	$_GACO = LoadClass(
@@ -81,5 +66,5 @@ else {
 	);  
 }
 
-include_once $_GACO->Template();
+$_GACO->Build();
 ?>

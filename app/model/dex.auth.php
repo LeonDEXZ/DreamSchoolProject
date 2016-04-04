@@ -21,7 +21,7 @@ class DEXAuthModel extends DEXBaseModel
     
     private $is_login = false;
     
-    public function Init()
+    protected function Init()
     {
         $this->user = array(
             'id' => -1,

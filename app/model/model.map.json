@@ -11,6 +11,14 @@
 		"class_name": "DEXFileSystemModel",
 		"file_name": "dex.file_ssystem.php"
 	},
+	"steam_auth": {
+		"class_name": "DEXSteamAuthModel",
+		"file_name": "dex.steam_api.php"
+	},
+	"blog": {
+		"class_name": "DEXBlogModel",
+		"file_name": "dex.blog.php"
+	},
 	"index": {
 		"class_name": "DEXIndexModel",
 		"file_name": "dex.index.php"

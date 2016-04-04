@@ -19,10 +19,54 @@ defined('DEX_BASE_CONTROLLER') or die;
 class DSDefController extends DEXBaseController
 {   
     public $user_auth = null;
-    
+    public $blog_sys = null;
+
     protected function Run()
     {
-        $this->user_auth = $this->LoadModel('auth');
+        if ($this->onAJAX)
+        {
+            $mod = $this->GetAJAX('mod');
+            if ($mod)
+            {
+                if ($mod === "blog")
+                {
+                    $this->blog_sys = $this->LoadModel('blog');
+                    $this->view = 'ajax_blog_preview.php';
+
+                    $this->DATA['id'] = $this->GetAJAX('id');
+                    if ($this->DATA['id']) {
+                        $this->view = 'ajax_blog_show.php';
+                    }
+
+                    $this->AJAXShow = true;
+                }
+                else if ($mod === "index")
+                {
+                    $this->blog_sys = $this->LoadModel('blog');
+                    $this->view = 'ds_index.php';
+                    $this->AJAXShow = true;
+                }
+                else if ($mod === "slider")
+                {
+                    $this->view = 'ajax_slider.php';
+                    $this->AJAXShow = true;
+                }
+            }     
+        }
+        else {
+            $this->user_auth = $this->LoadModel('steam_auth');
+
+            $this->page_name = 'Главная';     
+            $this->view = 'ds_index.php';
+
+            $this->blog_sys = $this->LoadModel('blog');
+        }
+        
+        // if (isset($_GET['mod'])) {
+        //     if ($_GET['mod'] === "blog")
+        // }
+
+        /*$this->user_auth = $this->LoadModel('auth');
         
         if (empty($_GET['m'])) {
             $q = 'general';
@@ -45,7 +89,7 @@ class DSDefController extends DEXBaseController
                 $this->PageAdmin();
             }
             break;
-        }
+        }*/
     }
     
     private function PageGeneral()

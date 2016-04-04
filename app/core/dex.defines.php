@@ -19,6 +19,7 @@ define('DEX_IMAGES_PATH', DEX_BASE_PATH . 'images/');
 define('DEX_JS_PATH', DEX_BASE_PATH . 'js/');
 define('DEX_FONTS_PATH', DEX_BASE_PATH . 'fonts/');
 define('DEX_CSS_PATH', DEX_BASE_PATH . 'css/');
+define('DEX_INCLUDE_PATH', DEX_BASE_PATH.'include/');
 
 // Massage trigger
 define('DEX_MESSAGE_NORMAL', 'normal');

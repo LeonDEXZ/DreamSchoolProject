@@ -111,7 +111,8 @@ class DEXDataBase
 		{
 			if (isset($query[$y]))
 			{
-				$new_query .= "'" . @mysql_real_escape_string($query[$y++]) . "'";
+				// $new_query .= "'" . @mysql_real_escape_string($query[$y++]) . "'";
+				$new_query .= @mysql_real_escape_string($query[$y++]);
 			}
 			if (isset($arr_query[$x]))
 			{

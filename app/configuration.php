@@ -35,3 +35,6 @@ $_GConfig['def_controller'] = 'dreamschool';
 $_GConfig['tmp_main_file'] = 'DreamSchool/main_tmp.php';
 
 $_GConfig['lang'] = 'ru'; // name lang file php for dir lang
+
+define('DEX_SITE_PATH', 'http://localhost/DreamSchoolProject/app');
+define('DEX_SITE_PATH_LITE', 'localhost/DreamSchoolProject/app');

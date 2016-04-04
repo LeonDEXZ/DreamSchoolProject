@@ -18,6 +18,9 @@ var DEXbaseDir = "app",
 gulp.task('libs-i', function() {
 	gulp.src(DEXbaseDir + '/libs/font-awesome/fonts/*.*')
 		.pipe(gulp.dest(DEXbaseDir + '/fonts'));
+
+	gulp.src('vendor/iignatov/lightopenid/openid.php')
+		.pipe(gulp.dest(DEXbaseDir + '/include/lightopenid'));
 });
 
 gulp.task('styles', function() {
@@ -33,12 +36,13 @@ gulp.task('styles', function() {
 
 gulp.task('scripts', function() {
 	return gulp.src([
-			DEXbaseDir + '/libs/jquery/dist/jquery.min.js',
-			DEXbaseDir + '/libs/bootstrap/dist/js/bootstrap.min.js',
-			DEXbaseDir + '/libs/superfish/dist/js/superfish.min.js',
-			DEXbaseDir + '/libs/owl.carousel/dist/owl.carousel.min.js',
-			DEXbaseDir + '/libs/nanoscroller/bin/javascripts/jquery.nanoscroller.min.js',
-			DEXbaseDir + '/libs/jquery-pjax/jquery.pjax.js'
+			DEXbaseDir + '/libs/jquery/dist/jquery.js',
+			DEXbaseDir + '/libs/bootstrap/dist/js/bootstrap.js',
+			DEXbaseDir + '/libs/superfish/dist/js/superfish.js',
+			DEXbaseDir + '/libs/owl.carousel/dist/owl.carousel.js',
+			DEXbaseDir + '/libs/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
+			// DEXbaseDir + '/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
+			// DEXbaseDir + '/libs/jquery-pjax/jquery.pjax.js'
 		])
 		.pipe(concat('libs.min.js'))
 		//.pipe(uglify())
@@ -76,11 +80,21 @@ gulp.task('watch', function() {
 });
 
 gulp.task('clean', function() {
-	del([DEXdistDir + '/**/*', '!' + DEXdistDir + '/ftpsync.settings']);
+	del([
+		DEXdistDir + '/**/*',
+		'!' + DEXdistDir + '/ftpsync.settings',
+		'!' + DEXdistDir + '/configuration.php'
+	]);
 });
 
 gulp.task('build', ['clean', 'libs-i', 'styles', 'scripts'], function() {
-	gulp.src(DEXbaseDir + '/*.php')
+	gulp.src([
+		'!' + DEXbaseDir + '/configuration.php',
+		DEXbaseDir + '/*.php'
+	])
+	.pipe(gulp.dest(DEXdistDir));
+
+	gulp.src(DEXbaseDir + '/.htaccess')
 		.pipe(gulp.dest(DEXdistDir));
 
 	gulp.src(DEXbaseDir + '/css/**/*')
@@ -120,6 +134,9 @@ gulp.task('build', ['clean', 'libs-i', 'styles', 'scripts'], function() {
 
 	gulp.src(DEXbaseDir + '/view/**/*')
 		.pipe(gulp.dest(DEXdistDir + '/view'));
+
+	gulp.src(DEXbaseDir + '/include/**/*')
+		.pipe(gulp.dest(DEXdistDir + '/include'));
 });
 
 gulp.task('pak', function() {

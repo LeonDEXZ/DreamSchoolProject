@@ -1,10 +1,65 @@
 @import "bourbon"
 
-@import "app/libs/bootstrap/dist/css/bootstrap.min"
+@import "app/libs/bootstrap/dist/css/bootstrap"
 @import "app/libs/font-awesome/scss/font-awesome.scss"
 @import "app/libs/superfish/dist/css/superfish"
 @import "app/libs/owl.carousel/src/scss/owl.carousel.scss"
-@import "app/libs/animate.css/animate.min"
+// @import "app/libs/owl.carousel/src/scss/owl.theme.default.scss"
+// @import "app/libs/animate.css/animate"
 @import "app/libs/nanoscroller/bin/css/nanoscroller.scss"
+// @import "app/libs/magnific-popup/dist/magnific-popup"
 
 @import "media"
+@import "vars.sass"
+
+.info-boxs
+	.info-box
+		margin-bottom: 25px
+		&-title
+			font-size: 24px
+			padding: 5px
+			background-color: lighten($main-color, 10%)
+			border: 3px solid lighten($main-color, 15%)
+			font-family: "RobotoCondensedBold", sane-sarif
+			text-transform: uppercase
+			text-align: center
+		.blog-content
+			padding: 0 15px
+			background-color: lighten($main-color, 5%)
+			height: 420px
+			border: 3px solid lighten($main-color, 15%)
+			border-top: none
+			.blog
+				padding: 20px
+				&-title
+					border-bottom: 3px solid $acce-color
+					font-size: 18px
+					font-family: "RobotoBold", sane-sarif
+				&-minitext
+					padding: 10px 0
+		.match-first
+			background-color: $acce-color
+			background-size: cover
+			background-position: 0 -40px
+			border: 1px solid $acce-color
+			&-logovs
+				display: inline-block
+				img
+					padding: 15px
+					margin-top: -35px
+				div
+					display: inline-block
+					font-size: 52px
+					margin-top: 30px
+					font-family: "RobotoBold", sane-sarif
+
+			&-info
+				display: inline-block
+				text-align: right
+				padding: 10px
+				&-time
+					font-size: 34px
+					font-family: "RobotoBold", sane-sarif
+				&-name
+					font-family: "RobotoCondensedBold", sane-sarif
+					font-size: 22px
