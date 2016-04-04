@@ -1,0 +1,20 @@
+{
+	"name": "dex/dream-school-project",
+	"authors": [
+	{
+		"name": "LeonDEXZ",
+		"email": "leon.zharikov@gmail.com"
+	}
+	],
+	"repositories": [
+	{
+		"type": "vcs",
+		"url": "https://github.com/iignatov/LightOpenID"
+	}
+	],
+
+	"require": {    
+		"php": ">=5.4.0",
+		"iignatov/lightopenid": "*"
+	}
+}
