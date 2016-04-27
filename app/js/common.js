@@ -94,7 +94,7 @@ $(function() {
 		});
 
 		$(document).on('click', '#but-g-c', function(event) {
-
+			
 		});
 
 		$(document).on('click', '#but-g-sc', function(event) {

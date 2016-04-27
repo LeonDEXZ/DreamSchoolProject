@@ -11,9 +11,17 @@ var gulp			= require('gulp'),
 	imagemin 		= require('gulp-imagemin'),
 	pngquant 		= require('imagemin-pngquant'),
 	zip				= require('gulp-zip');
+	//ftp 			= require('gulp-ftp');
 
 var DEXbaseDir = "app",
 	DEXdistDir = "build";
+
+// var ftpSetting = {
+// 	host: 'ftp.dreamschool.pro',
+// 	user: 'dex@dreamschool.pro',
+// 	pass: '2AYYnaHm',
+// 	remotePath: '/dota2'
+// };
 
 gulp.task('libs-i', function() {
 	gulp.src(DEXbaseDir + '/libs/font-awesome/fonts/*.*')
@@ -68,14 +76,18 @@ gulp.task('browser-sync', ['styles', 'scripts'], function() {
 gulp.task('watch', function() {
 	gulp.watch(DEXbaseDir + '/sass/*.sass', ['styles'])
 		.on('change', browserSync.reload);
+		//.on('change', ftp(ftpSetting));
 
 	gulp.watch(DEXbaseDir + '/libs/**/*.js', ['scripts'])
+		//.on('change', ftp(ftpSetting));
 		.on('change', browserSync.reload);
 
 	gulp.watch(DEXbaseDir + '/js/*.js')
-		.on("change", browserSync.reload);
+		//.on('change', ftp(ftpSetting));
+		.on('change', browserSync.reload);
 
 	gulp.watch(DEXbaseDir + '/**/*.php')
+	 	//.on('change', ftp(ftpSetting));
 	 	.on('change', browserSync.reload);
 });
 

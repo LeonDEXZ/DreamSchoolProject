@@ -47,6 +47,7 @@ $_GDefController = LoadClass(
 	DEX_CONTROLLER_MAP,
 	DEX_CONTROLLER_PATH
 );
+$_GACO = $_GDefController; 
 
 if (isset($_GET['controller']))
 {
@@ -56,14 +57,6 @@ if (isset($_GET['controller']))
 		DEX_CONTROLLER_PATH,
 		$_GDefController
 	); 
-}
-else {
-	$_GACO = LoadClass(
-		$_GConfig['def_controller'],
-		DEX_CONTROLLER_MAP,
-		DEX_CONTROLLER_PATH,
-		$_GDefController
-	);  
 }
 
 $_GACO->Build();

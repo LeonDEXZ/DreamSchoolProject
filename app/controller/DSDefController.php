@@ -25,7 +25,7 @@ class DSDefController extends DEXBaseController
     {
         if ($this->onAJAX)
         {
-            $mod = $this->GetAJAX('mod');
+            $mod = $this->GetQuery('mod');
             if ($mod)
             {
                 if ($mod === "blog")
@@ -33,11 +33,11 @@ class DSDefController extends DEXBaseController
                     $this->blog_sys = $this->LoadModel('blog');
                     $this->view = 'ajax_blog_preview.php';
 
-                    $this->DATA['id'] = $this->GetAJAX('id');
+                    $this->DATA['id'] = $this->GetQuery('id');
                     if ($this->DATA['id']) {
                         $this->view = 'ajax_blog_show.php';
                     }
-
+                    
                     $this->AJAXShow = true;
                 }
                 else if ($mod === "index")
@@ -60,7 +60,23 @@ class DSDefController extends DEXBaseController
             $this->view = 'ds_index.php';
 
             $this->blog_sys = $this->LoadModel('blog');
+
+            // $mod = $this->GetQuery('mod');
+
+            // if ($mod) {
+            //     if ($mod === "blog") {
+
+            //         $this->blog_sys = $this->LoadModel('blog');
+            //         $this->view = 'ajax_blog_preview.php';
+
+            //         $this->DATA['id'] = $this->GetQuery('id');
+            //         if ($this->DATA['id']) {
+            //             $this->view = 'ajax_blog_show.php';
+            //         }
+            //     }
+            // }
         }
+
         
         // if (isset($_GET['mod'])) {
         //     if ($_GET['mod'] === "blog")

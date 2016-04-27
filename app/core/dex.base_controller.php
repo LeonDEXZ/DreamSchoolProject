@@ -220,7 +220,7 @@ abstract class DEXBaseController
         include_once $this->Template();
     }
 
-    protected function GetAJAX()
+    protected function GetQuery()
     {
         $return_array = array();
         $args = func_get_args();
