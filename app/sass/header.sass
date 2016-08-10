@@ -14,11 +14,14 @@ body
 
 a
 	text-decoration: none
-	color: $acce-color
+	color: lighten($acce-color, 25%)
 	outline: none!important
 a:hover
 	text-decoration: none
-	color: lighten($acce-color, 25%)
+	color: #fff
+
+.noLink
+  pointer-events: none
 
 img
 	outline: none!important
@@ -32,6 +35,9 @@ h1, h2, h3, h4, h5, h6, .button
 	font-weight: normal
 	text-transform: uppercase
 
+.clearfx
+	clear: both
+	
 .main_page
 	border-top: 9px solid $acce-color
 	border-bottom: 9px solid $acce-color
@@ -46,17 +52,19 @@ h1, h2, h3, h4, h5, h6, .button
 .message
  	padding: 10px
  	margin: 10px 0
+ 	margin-top: 0
+ 	font-family: "RobotoCondensedBold", sane-sarif
 .error
 	border: 2px solid $error_color
-	background-color: darken($error_color, 30%)
+	background-color: lighten($main-color, 10%)
 	color: $error_color
 .warning
 	border: 2px solid $warning_color
-	background-color: darken($warning_color, 30%)
+	background-color: lighten($main-color, 10%)
 	color: $warning_color
 .normal
 	border: 2px solid $normal_color
-	background-color: darken($normal_color, 30%)
+	background-color: lighten($main-color, 10%)
 	color: $normal_color
 
 header
@@ -150,10 +158,13 @@ header
 	li:hover
 		background-color: lighten($main-color, 5%)
 		border-bottom: 3px solid $acce-color
-	a
+	a, span
 		border: none
 		color: #fff
 		font-family: "RobotoCondensedRegular", sane-sarif
+
+	span
+		padding: .75em 1em
 
 .owl-item
 	-webkit-backface-visibility: hidden
@@ -223,7 +234,7 @@ header
 .button-bar
 	background-color: $acce-color
 	text-align: center
-	margin-bottom: 25px
+	margin-bottom: 20px
 	.main-button
 		display: inline-block
 		padding: 15px 25px
@@ -270,9 +281,6 @@ header
 		//top: 0
 		//width: 100%
 
-#message-box
-	margin-bottom: 25px
-
 #preloader-main
 	position: fixed
 	z-index: 99
@@ -283,7 +291,6 @@ header
 	background: $main-color url(../images/preload.gif) center no-repeat
 
 footer
-	text-align: center
 	font-size: 18px
 	padding: 25px
 	span

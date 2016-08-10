@@ -1,65 +1,544 @@
 @import "bourbon"
 
 @import "app/libs/bootstrap/dist/css/bootstrap"
+@import "app/libs/bootstrap/dist/css/bootstrap-theme"
 @import "app/libs/font-awesome/scss/font-awesome.scss"
 @import "app/libs/superfish/dist/css/superfish"
 @import "app/libs/owl.carousel/src/scss/owl.carousel.scss"
 // @import "app/libs/owl.carousel/src/scss/owl.theme.default.scss"
 // @import "app/libs/animate.css/animate"
 @import "app/libs/nanoscroller/bin/css/nanoscroller.scss"
-// @import "app/libs/magnific-popup/dist/magnific-popup"
+@import "app/libs/magnific-popup/dist/magnific-popup"
+@import "app/libs/jquery-form-styler/jquery.formstyler"
+// @import "app/libs/wysibb/theme/default/wbbtheme"
 
 @import "media"
 @import "vars.sass"
 
-.info-boxs
-	.info-box
-		margin-bottom: 25px
-		&-title
-			font-size: 24px
-			padding: 5px
-			background-color: lighten($main-color, 10%)
-			border: 3px solid lighten($main-color, 15%)
-			font-family: "RobotoCondensedBold", sane-sarif
-			text-transform: uppercase
-			text-align: center
-		.blog-content
-			padding: 0 15px
-			background-color: lighten($main-color, 5%)
-			height: 420px
-			border: 3px solid lighten($main-color, 15%)
-			border-top: none
-			.blog
-				padding: 20px
-				&-title
-					border-bottom: 3px solid $acce-color
-					font-size: 18px
-					font-family: "RobotoBold", sane-sarif
-				&-minitext
-					padding: 10px 0
-		.match-first
-			background-color: $acce-color
-			background-size: cover
-			background-position: 0 -40px
-			border: 1px solid $acce-color
-			&-logovs
-				display: inline-block
-				img
-					padding: 15px
-					margin-top: -35px
-				div
-					display: inline-block
-					font-size: 52px
-					margin-top: 30px
-					font-family: "RobotoBold", sane-sarif
+select, option, select:focus, option:focus
+	outline: none
+	border: none
 
-			&-info
-				display: inline-block
-				text-align: right
+.DS_Style_BOX_HEAD
+	background-color: lighten($main-color, 10%)
+	border: 3px solid lighten($main-color, 15%)
+	font-family: "RobotoCondensedBold", sane-sarif
+	font-size: 24px
+	padding: 5px
+	text-transform: uppercase
+.DS_Style_BOX_BODY
+	padding: 15px
+	background-color: lighten($main-color, 5%)
+	border: 3px solid lighten($main-color, 15%)
+	border-top: none
+
+.style_box
+	margin-bottom: 10px
+
+	.head
+		@extend .DS_Style_BOX_HEAD
+
+	.body
+		@extend .DS_Style_BOX_BODY
+
+	.box
+		background-color: lighten($main-color, 10%)
+		border: 3px solid lighten($main-color, 15%)
+		font-family: "RobotoBold", sane-sarif
+		padding: 15px
+		margin-bottom: 10px
+
+	.clear_box
+		font-family: "RobotoCondensedRegular", sane-sarif
+		font-size: 18px
+
+	.remark
+		display: block
+		font-family: "RobotoBold", sane-sarif
+		font-size: 18px
+		color: lighten($main-color, 25%)
+		margin: 10px
+		padding: 5px
+
+
+.index
+	.box
+		margin-bottom: $index_box_bottom_margen
+		.title
+			@extend .DS_Style_BOX_HEAD
+
+		.body
+			@extend .DS_Style_BOX_BODY
+			height: $index_box_size
+
+		.match
+			border-bottom: 3px solid $acce-color
+			margin-bottom: 30px
+			padding-bottom: 10px
+			span
 				padding: 10px
-				&-time
-					font-size: 34px
-					font-family: "RobotoBold", sane-sarif
-				&-name
-					font-family: "RobotoCondensedBold", sane-sarif
-					font-size: 22px
+			.match_time
+				font-size: 14px
+			.match_name
+				font-family: "RobotoBold", sane-sarif
+				font-size: 18px
+		.youtube
+			margin-bottom: 10px
+			border-bottom: 3px solid $acce-color
+			.youtube_title
+				font-family: "RobotoCondensedRegular", sane-sarif
+				font-size: 18px
+				color: #fff
+			.youtube_img
+				border: 3px solid lighten($main-color, 15%)
+				border-bottom: none
+			&:hover
+				background-color: lighten($main-color, 10%)
+				&, .youtube_title
+					color: lighten($acce-color, 10%)
+		.blog
+			margin-bottom: 30px
+			.blog_title
+				border-bottom: 3px solid $acce-color
+				padding: 5px
+			.blog_text
+			a
+				padding: 5px
+	.tow_box
+		.body
+			height: $index_tow_box_size
+			
+.news
+	a
+		margin-right: 15px
+
+.comments
+	.title
+		padding: 10px
+		font-size: 18px
+		font-family: "RobotoBold", sane-sarif
+		border-bottom: 3px solid $acce-color
+	.content
+		margin-top: 5px
+		margin-bottom: 25px
+	.feedback
+	.comment
+		padding: 10px
+		font-family: "RobotoCondensedRegular", sane-sarif
+		background-color: lighten($main-color, 10%)
+		border: 3px solid lighten($main-color, 15%)
+		word-wrap: break-word
+		i
+			padding: 15px
+			margin-right: 10px
+			border-right: 3px solid $acce-color
+	.username
+		font-size: 12px
+		font-family: "RobotoBold", sane-sarif
+		padding: 5px
+		line-height: 21px
+	.but
+		padding: 5px
+		visibility: hidden
+		a
+			padding: 0 5px
+			font-size: 12px
+	.no_comment
+		font-family: "RobotoBold", sane-sarif
+		font-size: 22px
+		padding: 30px
+.boost
+	.first
+		font-family: "RobotoBold", sane-sarif
+		font-size: 18px
+
+	.second
+		i, span
+			color: $acce-color
+		span
+			font-family: "RobotoBold", sane-sarif
+
+	.line
+		border-bottom: 1px solid $acce-color
+		padding: 10px
+.coach, .commentator, .menager, .blog
+	font-family: "RobotoCondensedRegular", sane-sarif
+	font-size: 18px
+	iframe
+		display: block
+		margin: 0 auto
+		padding: 10px
+		background-color: lighten($main-color, 10%)
+		
+.full_blog
+	.full_blog_title
+		border-bottom: 3px solid $acce-color
+		font-family: "RobotoCondensedBold", sane-sarif
+		text-transform: uppercase
+		padding: 10px
+		font-size: 21px
+
+	.full_blog_text
+		padding: 10px
+		font-family: "RobotoCondensedRegular", sane-sarif
+		font-size: 18px
+
+.trainer_profile
+	.photo
+		padding: 10px
+		border: 3px solid $acce-color
+		background-color: lighten($main-color, 10%)
+		img
+			padding: 4px
+
+	.title
+		padding: 10px
+		font-family: "RobotoCondensedRegular", sane-sarif
+		font-size: 18px
+		border-bottom: 3px solid $acce-color
+		
+	.info
+		padding: 10px
+		font-family: "RobotoCondensedRegular", sane-sarif
+		font-size: 18px
+
+// .info-boxs
+// 	.info-box
+// 		margin-bottom: 25px
+// 		&-title
+// 			font-size: 24px
+// 			padding: 5px
+// 			background-color: lighten($main-color, 10%)
+// 			border: 3px solid lighten($main-color, 15%)
+// 			font-family: "RobotoCondensedBold", sane-sarif
+// 			text-transform: uppercase
+// 			text-align: center
+// 		.blog-content
+// 			padding: 15px
+// 			background-color: lighten($main-color, 5%)
+// 			height: 420px
+// 			border: 3px solid lighten($main-color, 15%)
+// 			border-top: none
+// 			display: block
+// 			.blog
+// 				padding: 20px
+// 				&-title
+// 					border-bottom: 3px solid $acce-color
+// 					font-size: 18px
+// 					font-family: "RobotoBold", sane-sarif
+// 				&-minitext
+// 					padding: 10px 0
+// 			// select
+// 			// 	margin-top: 18px
+// 			// 	background-color: lighten($main-color, 15%)
+// 			// 	padding: 8px
+// 		.match-first
+// 			background-color: $acce-color
+// 			background-size: cover
+// 			background-position: 0 -40px
+// 			border: 1px solid $acce-color
+// 			&-logovs
+// 				display: inline-block
+// 				img
+// 					padding: 15px
+// 					margin-top: -35px
+// 				div
+// 					display: inline-block
+// 					font-size: 52px
+// 					margin-top: 30px
+// 					font-family: "RobotoBold", sane-sarif
+
+// 			&-info
+// 				display: inline-block
+// 				text-align: right
+// 				padding: 10px
+// 				&-time
+// 					font-size: 34px
+// 					font-family: "RobotoBold", sane-sarif
+// 				&-name
+// 					font-family: "RobotoCondensedBold", sane-sarif
+// 					font-size: 22px
+	
+.jq-selectbox
+	width: 100%
+	margin-bottom: 10px
+	li
+		color: #fff
+		font-family: "RobotoBold", sane-sarif
+		font-size: 16px
+		height: 52px
+		padding-left: 15px
+		padding-top: 18px
+
+	li:hover
+		background-color: $acce-color
+
+.jq-selectbox li.selected
+	background-color: darken($acce-color, 5%)
+
+.jq-selectbox:hover, .jq-selectbox:active
+	// .jq-selectbox__trigger
+	// 	background-color: darken($main-color, 2%)
+	.jq-selectbox__trigger-arrow
+		border: none
+
+.jq-selectbox__dropdown
+	background-color: lighten($main-color, 15%)
+	border-radius: 0
+	border: 1px solid $acce-color
+	border-top: none
+	margin: 0
+
+.jq-selectbox.focused .jq-selectbox__select
+	border: 1px solid $acce-color
+
+.jq-selectbox__select
+	border: 1px solid lighten($main-color, 15%)
+	// border-bottom: 1px solid $acce-color
+	border-radius: 0
+	color: #fff
+	box-shadow: none
+	background: none
+	background-color: lighten($main-color, 15%)
+	text-shadow: none
+	font-family: "RobotoBold", sane-sarif
+	font-size: 16px
+	height: 52px
+	padding-left: 15px
+	padding-top: 10px
+
+.jq-selectbox__select:hover
+	background: none
+	background-color: lighten($main-color, 15%)
+
+.jq-selectbox__select:active
+	background: none
+	background-color: lighten($main-color, 15%)
+	box-shadow: none
+			
+.jq-selectbox__trigger
+	width: 52px
+	border-left: none
+	// border-left: 1px solid $acce-color
+
+.jq-selectbox__trigger-arrow
+	top: 11px
+	right: 34px
+	border: none
+	color: $acce-color
+
+
+.boost-info
+	&-box
+
+.boost-menu
+	// width: 50%
+	// float: left
+.boost-menu-top
+
+.text_box
+	outline: none
+	margin-bottom: 10px
+	width: 100%
+	height: 52px
+	font-family: "RobotoBold", sane-sarif
+	font-size: 16px
+	padding-left: 15px
+	border: 1px solid lighten($main-color, 15%)
+	background-color: lighten($main-color, 15%)
+	color: #fff
+	&:focus
+		border: 1px solid $acce-color
+
+.textarea_box
+	width: 100%
+	border: 1px solid lighten($main-color, 15%)
+	background-color: lighten($main-color, 15%)
+	outline: none
+	padding: 15px
+	font-family: "RobotoBold", sane-sarif
+	font-size: 16px
+	&:focus
+		border: 1px solid $acce-color
+
+.mfp-close-btn-in .mfp-close
+	color: #fff
+
+.acce-but
+	display: inline-block
+	margin: 10px auto
+	outline: none
+	background-color: $acce-color
+	font-family: "RobotoBold", sane-sarif
+	font-size: 18px
+	padding: 8px 49px
+	color: #fff
+	border: none
+	margin-bottom: 0
+	&:hover
+		background-color: darken($acce-color, 5%)
+		color: #fff
+	&:active
+		background-color: lighten($main-color, 15%)
+	&:focus
+		color: #fff
+		text-decoration: none
+
+.price
+	font-family: "RobotoBold", sane-sarif
+	border-bottom: 1px solid $acce-color
+	color: #fff
+	i, span
+		color: $acce-color
+
+.subinfo_box
+	background-color: lighten($main-color, 10%)
+	border: 3px solid lighten($main-color, 15%)
+	font-family: "RobotoBold", sane-sarif
+	padding: 15px
+
+.subinfo_clear_box
+	font-family: "RobotoCondensedRegular", sane-sarif
+	font-size: 18px
+
+.subinfo_remark
+	display: block
+	font-family: "RobotoBold", sane-sarif
+	font-size: 18px
+	color: lighten($main-color, 25%)
+	margin-left: 10px
+	padding: 5px
+
+.popup-body
+    padding: 10px
+    width: 650px
+    margin: 0 auto
+    position: relative
+    background-color: lighten($main-color, 5%)
+
+.popup-title
+	padding: 15px
+	font-size: 18px
+	text-transform: uppercase
+	font-family: "RobotoCondensedBold", sane-sarif
+
+// .wysibb
+// 	background-color: lighten($main-color, 5%)
+// 	border: 3px solid lighten($main-color, 15%)
+
+// .wysibb
+// 	.wysibb-toolbar
+// 		border-bottom: 3px solid lighten($main-color, 15%)
+// 		background: lighten($main-color, 15%)
+
+// 		.wysibb-toolbar-container
+// 			border-right: 3px solid lighten($main-color, 25%)
+// 			.wysibb-toolbar-btn
+// 				&:hover
+// 					background: lighten($main-color, 5%)
+// 					border: 1px solid lighten($main-color, 15%)
+// 					.fonticon
+// 						color: $acce-color
+// 						text-shadow: 0px 1px 0px darken($acce-color, 10%)
+// 				&.on
+// 					.fonticon
+// 						color: $acce-color
+// 						text-shadow: 0px 1px 0px darken($acce-color, 10%)
+// 				&.on, &:active
+// 					background: lighten($main-color, 5%)
+// 					border: 1px solid lighten($main-color, 15%)
+// 				&.on:hover, &:active
+// 					background: lighten($main-color, 5%)
+// 					border: 1px solid lighten($main-color, 15%)
+// 				.fonticon
+// 					color: #fff
+// 					text-shadow: 0px 1px 0px #000
+// 				span.btn-tooltip
+// 					border: 1px solid lighten($main-color, 15%)
+// 				&.wbb-select
+// 					.wbb-list
+// 						background: lighten($main-color, 10%)
+// 						border: 1px solid lighten($main-color, 15%)
+// 				&.wbb-dropdown.on, &.wbb-dropdown.on:active
+// 					background: lighten($main-color, 5%)
+// 					border: 1px solid lighten($main-color, 15%)
+
+// .wbb-list .nc:hover, .tbl-sel:hover, .wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn.wbb-select:hover, .wbb-select .option:hover, #wbbmodal .wbbm .wbbm-tablist ul li:hover
+//     background: lighten($main-color, 5%)
+
+// @media (min-width: 992px)
+// 	.wysibb
+// 		.wysibb-toolbar
+// 			.wysibb-toolbar-container
+// 				.wysibb-toolbar-btn
+// 					.wbb-list
+// 						background: lighten($main-color, 5%)
+// 						border: 1px solid lighten($main-color, 15%)
+
+// 	.wysibb-text
+// 		border-top: none
+// .wbb-select
+// 	.option
+// 		&:hover
+// 			lighten($main-color, 15%)
+// // .wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn.wbb-dropdown,.wysibb .wysibb-toolbar .wysibb-toolbar-container .wysibb-toolbar-btn.wbb-dropdown:active{
+// .wysibb-texarea
+// 	background-color: lighten($main-color, 5%)
+
+blockquote
+	border-left: 5px solid $acce-color
+	background: lighten($main-color, 10%)
+
+// #wbbmodal
+// 	.wbbm
+// 		background-color: lighten($main-color, 5%)
+// 		border: none
+
+// 	.wbbm-title
+// 		border-bottom: none
+// 		color: #fff
+// 		.wbbm-title-text
+// 			padding-left: 5px
+// 			font-family: "RobotoBold", sane-sarif
+
+// 	.wbbm-bottom
+// 		background: none
+// 		border-top: none
+// 		font-family: "RobotoBold", sane-sarif
+
+// 	.wbb-button
+// 		background: $acce-color
+// 		border: 1px solid $acce-color
+// 		&:hover
+// 			background: darken($acce-color, 10%)
+// 			border: 1px solid darken($acce-color, 10%)
+
+// 	.wbb-cancel-button
+// 		&:hover
+// 			background: lighten($main-color, 25%)
+// 			border: 1px solid lighten($main-color, 25%)
+// 			color: #fff
+
+// 	.wbbm-cont
+// 		padding: 10px
+
+// 	.wbbm-inp-row
+// 		label
+// 			padding: 10px
+// 			font-family: "RobotoBold", sane-sarif
+// 		input
+// 			outline: none
+// 			margin-bottom: 10px
+// 			width: 100%
+// 			height: 52px
+// 			font-family: "RobotoBold", sane-sarif
+// 			font-size: 16px
+// 			padding-left: 15px
+// 			border: 1px solid lighten($main-color, 15%)
+// 			background-color: lighten($main-color, 15%)
+// 			color: #fff
+// 			&:focus
+// 				border: 1px solid $acce-color
+
+// .bottom-resize-line:hover, .bottom-resize-line.drag
+// 	background: $acce-color

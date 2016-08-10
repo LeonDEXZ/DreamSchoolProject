@@ -1,4 +1,11 @@
 RewriteEngine on
 
-RewriteRule    	^exit$    			index.php?exit 					[NC,L]
-RewriteRule    	^blog/([0-9]+)/?$   index.php?mod=blog&id=$1 		[NC,L]
+RewriteRule    	^exit$    						index.php?exit 								[NC,L]
+RewriteRule    	^news$    						index.php?mod=blog&news						[NC,L]
+RewriteRule    	^news/page/([0-9]+)$    		index.php?mod=blog&news=&page=$1			[NC,L]
+RewriteRule    	^coach$    						index.php?mod=coach 						[NC,L]
+RewriteRule    	^commentator$    				index.php?mod=commentator 					[NC,L]
+RewriteRule    	^menager$    					index.php?mod=menager						[NC,L]
+RewriteRule    	^boost$    						index.php?mod=boost							[NC,L]
+RewriteRule    	^blog/([0-9]+)/?$   			index.php?mod=blog&id=$1 					[NC,L]
+RewriteRule    	^profile/([0-9]+)$   			index.php?mod=trainer_profile&id=$1 		[NC,L]

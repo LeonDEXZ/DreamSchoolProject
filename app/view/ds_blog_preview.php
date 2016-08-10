@@ -10,7 +10,7 @@ for ($id = 0; $id < $count; $id++)
     echo "<div class=\"blog\">";                
     echo "<h4 class=\"blog-title\">{$blog['title']}</h4>";
     echo "<div class=\"blog-minitext\">{$blog['preview']}</div>";
-    echo '<a href="'.DEX_SITE_PATH.'/blog/'.$blog['id'].'" class="pull-right" onclick="ajax_load({mod: "blog", id: "'.$id.'"});return false">Читать далее...</a>';
+    echo '<a href="'.DEX_SITE_PATH.'/blog/'.$blog['id'].'" class="pull-right" onclick="ajax_load({mod: "blog", id: "'.$id.'"});">Читать далее...</a>';
     echo "</div>";
 }
 ?>

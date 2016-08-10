@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/LeonDEXZ/DreamSchoolProject#readme",
   "devDependencies": {
-    "browser-sync": "^2.11.2",
+    "browser-sync": "^2.13.0",
     "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
@@ -32,5 +32,8 @@
     "gulp-zip": "^3.2.0",
     "imagemin-pngquant": "^4.2.2",
     "node-bourbon": "^4.2.8"
+  },
+  "dependencies": {
+    "gulp-less": "^3.1.0"
   }
 }

@@ -26,16 +26,16 @@ class DEXBlogModel extends DEXBaseModel
         $this->blog_count = (int)$_GDB->SelectCell('SELECT COUNT(*) FROM `blog`');
     }
 
-    public function GetBlogsLimit($limit)
+    public function GetBlogsLimit($start, $count)
     {
         global $_GDB;
         
-        if ($limit > $this->blog_count)
+        if ($start > $this->blog_count)
         {
-            $limit = $this->blog_count;
+            $start = $this->blog_count;
         }
 
-        return $_GDB->Select('SELECT * FROM `blog` LIMIT ?', $limit);
+        return $_GDB->Select('SELECT * FROM `blog` LIMIT ?, ?', $start, $count);
     }
 
     public function GetBlog($id)

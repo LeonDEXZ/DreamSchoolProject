@@ -81,6 +81,10 @@ class DEXSteamAuthModel extends DEXBaseModel
             "SELECT * FROM `auth` WHERE `hash_auth`='?'",
             $hash
         );
+
+        /// =================================================
+        //$auth = false;
+        /// =================================================
         
         if ($auth)
         {
@@ -104,6 +108,24 @@ class DEXSteamAuthModel extends DEXBaseModel
             $this->user['hash'] = $hash;
             
             $this->is_login = true;
+
+            // REGISTER            
+            $user_id = $_GDB->SelectCell(
+                'SELECT `id` FROM `users` WHERE `steamID`=?',
+                $this->user['steamID']
+            );
+
+            if ($user_id === null)
+            {
+                $user_id = $_GDB->Query(
+                    "INSERT INTO `users` (`name`, `steamID`) VALUES ('?', ?)",
+                    $player->personaname,
+                    $this->user['steamID']
+                );
+            }
+
+            $this->user['id'] = $user_id;
+
             return true;
         }
         else {
@@ -153,7 +175,7 @@ class DEXSteamAuthModel extends DEXBaseModel
                     setcookie('auth_hash', $this->user['hash']);
 
                     $_GDB->Query(
-                        "INSERT INTO `auth` (`ip`, `hash_auth`, `steamID`) VALUES ('?', '?', '?')",
+                        "INSERT INTO `auth` (`ip`, `hash_auth`, `steamID`) VALUES ('?', '?', ?)",
                         get_client_ip(),
                         $this->user['hash'],
                         $this->user['steamID']

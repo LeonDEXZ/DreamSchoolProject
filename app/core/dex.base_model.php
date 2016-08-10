@@ -45,4 +45,23 @@ abstract class DEXBaseModel
             return $this->ReturnDATA;
         }
     }
+
+    protected function LoadFile($file)
+    {
+        $view_file = DEX_VIEW_PATH . $file;
+
+        if (file_exists($view_file))
+        {
+            return $view_file;
+        }
+        else
+        {
+            PushMessage(
+                DEX_MESSAGE_DEBUG,
+                "error_DEXBaseModel_ShowFile_file_exists FILE=\"{$view_file}\" CLASS=".$this->Name()
+            );
+        }
+
+        return null;
+    }
 }

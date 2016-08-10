@@ -18,166 +18,247 @@ defined('DEX_BASE_CONTROLLER') or die;
 
 class DSDefController extends DEXBaseController
 {   
-    public $user_auth = null;
-    public $blog_sys = null;
+	public $user_auth = null;
+	public $blog_sys = null;
+	public $trainer_profile_sys = null;
+	public $comments_sys = null;
 
-    protected function Run()
-    {
-        if ($this->onAJAX)
-        {
-            $mod = $this->GetQuery('mod');
-            if ($mod)
-            {
-                if ($mod === "blog")
-                {
-                    $this->blog_sys = $this->LoadModel('blog');
-                    $this->view = 'ajax_blog_preview.php';
+	protected function Run()
+	{
+		global $_GText, $_GDB;
 
-                    $this->DATA['id'] = $this->GetQuery('id');
-                    if ($this->DATA['id']) {
-                        $this->view = 'ajax_blog_show.php';
-                    }
-                    
-                    $this->AJAXShow = true;
-                }
-                else if ($mod === "index")
-                {
-                    $this->blog_sys = $this->LoadModel('blog');
-                    $this->view = 'ds_index.php';
-                    $this->AJAXShow = true;
-                }
-                else if ($mod === "slider")
-                {
-                    $this->view = 'ajax_slider.php';
-                    $this->AJAXShow = true;
-                }
-            }     
-        }
-        else {
-            $this->user_auth = $this->LoadModel('steam_auth');
+		$this->user_auth = $this->LoadModel('steam_auth');
 
-            $this->page_name = 'Главная';     
-            $this->view = 'ds_index.php';
+		switch ($this->GetQuery('mod'))
+		{
+			case 'blog':
+			{
+				$this->blog_sys = $this->LoadModel('blog');
+				$this->view = 'ds_blog_preview.php';
 
-            $this->blog_sys = $this->LoadModel('blog');
+				if ($this->GetQuery('news') !== false)
+				{
+					$this->DATA['page'] = $this->GetQuery('page');
 
-            // $mod = $this->GetQuery('mod');
+					if ($this->DATA['page'] === false)
+						$this->DATA['page'] = 1;
 
-            // if ($mod) {
-            //     if ($mod === "blog") {
+					if ($this->DATA['page'] < 1)
+						$this->DATA['page'] = 1;
 
-            //         $this->blog_sys = $this->LoadModel('blog');
-            //         $this->view = 'ajax_blog_preview.php';
+					$this->DATA['count'] = $this->blog_sys->GetBlogCount();
+					$this->DATA['step'] = 12;
+					$this->DATA['link_count'] = ceil($this->DATA['count']/$this->DATA['step']);
 
-            //         $this->DATA['id'] = $this->GetQuery('id');
-            //         if ($this->DATA['id']) {
-            //             $this->view = 'ajax_blog_show.php';
-            //         }
-            //     }
-            // }
-        }
+					if ($this->DATA['page'] > $this->DATA['link_count'])
+						$this->DATA['page'] = $this->DATA['link_count'];
 
-        
-        // if (isset($_GET['mod'])) {
-        //     if ($_GET['mod'] === "blog")
-        // }
+					$this->page_name = 'Новсти';
+					$this->view = 'ds_news.php';
+					break;
+				}
 
-        /*$this->user_auth = $this->LoadModel('auth');
-        
-        if (empty($_GET['m'])) {
-            $q = 'general';
-        }
-        else {
-            $q = $_GET['m'];
-        }
-        
-        switch ($q)
-        {
-            case 'general':
-            default:
-            {
-                $this->PageGeneral();
-            }
-            break;
 
-            case 'admin':
-            {
-                $this->PageAdmin();
-            }
-            break;
-        }*/
-    }
-    
-    private function PageGeneral()
-    {
-        $this->page_name = 'Главная';     
-        $this->view = 'DreamSchool/index_tmp.php';
-        
-        $this->DATA['news'] = $this->LoadModel('news');
-    }
-    
-    private function PageAdmin()
-    {  
-        $this->page_name = 'Главная';
-        
-        $this->view = 'admin/index_tmp.html';
-        $this->template = 'admin/main_tmp.php';   
+				$this->DATA['id'] = $this->GetQuery('id');
+				if ($this->DATA['id'] !== false)
+				{
+					$this->comments_sys = $this->LoadModel('comments');
+					$this->comments_sys->user_auth = $this->user_auth;
 
-        if (!$this->user_auth->IsLogin())
-        {
-            $this->view = 'admin/login_form.html';
-        }
-        else
-        {
-            if (isset($_GET['v']))
-                switch ($_GET['v'])
-                {
-                    case 'edit_':
+					$this->DATA['blog'] = $this->blog_sys->GetBlog($this->DATA['id']);
+					
+					if ($this->DATA['blog'])
+					{
+						$this->page_name = $this->DATA['blog']['title'];
+						$this->view = 'ds_blog_id.php';
+					}
+					else {
+						$this->view = '404.php';
+					}
 
-                        PushMessage(DEX_MESSAGE_NORMAL, $_POST['bbcode']);
+					break;
+				}
+			}
 
-                        break;
+			default:
+			case 'index':
+			{
+				$this->page_name = 'Главная';
 
-                    case 'edit':
+				$this->blog_sys = $this->LoadModel('blog');
+				$this->view = 'ds_index.php';
+				
+				// $youtube = $this->LoadModel('youtube');
+				// $youtube->GetPlaylistLimit(5);
 
-                        $this->view = 'admin/edit.php';
+				break;
+			}
 
-                        break;
+			case 'slider':
+			{
+				$this->view = 'ajax_slider.php';	
 
-                    case 'test_bb_convert':
+				break;
+			}
 
-                        $this->view = 'admin/test_bb_convert.php';
+			case 'boost':
+			{
+				$this->page_name = 'Главная';
 
-                        break;
+				$this->trainer_profile_sys = $this->LoadModel('trainer_profile');
+				$this->DATA['booster'] = $this->trainer_profile_sys->GetProfileByType(array('booster'));
 
-                    case 'page':
+				$this->view = 'ds_boost.php';		
 
-                        $this->view = 'admin/' . ModDownTrim($_GET['p']) . '.php';
+				break;
+			}
 
-                        break;
+			case 'commentator':
+			{
+				$this->page_name = 'Главная';
 
-                    case 'save_page':
+				$this->view = 'ds_commentator.php';	
 
-                        $this->onAJAX = true;
-                        $this->view = 'admin/save_page.php';
+				break;
+			}
 
-                        if (isset($_POST['html_body']))
-                        {
-                            $name = ModDownTrim($_POST['name']);
-                            $name = str_replace(' ', '_', $name);
-                            $name = DEX_VIEW_PATH . 'admin/' . $name . '.php';
+			case 'menager':
+			{
+				$this->page_name = 'Главная';
 
-                            $this->DATA['RSP'] = file_put_contents($name, $_POST['html_body']);
-                        }
+				$this->view = 'ds_menager.php';	
 
-                        break;
+				break;
+			}
 
-                    default:
+			case 'coach':
+			{
+				$this->page_name = 'Главная';
 
-                        $this->view = DEX_EMPTY_VIEW;
+				$this->view = 'ds_coach.php';
 
-                        break;
-                }
-        }
-    }
+				break;
+			}
+
+			case 'add_commet':
+			{
+				if ($this->onAJAX)
+				{
+					$text = $this->GetQuery('text');
+					$place = $this->GetQuery('place');
+					
+					$text = trim($text);
+					$text = strip_tags($text);
+					$text = htmlspecialchars($text);
+
+					if ($text !== "" && $place !== "" && $this->user_auth->IsLogin()) {
+						// chapcha test
+						
+						$id = $_GDB->Query('INSERT INTO `comments` (`place`, `comment`, `user`) VALUES(\'?\', \'?\', '.$this->user_auth->user['id'].')', $place, $text);
+
+						$this->comments_sys = $this->LoadModel('comments');
+						$this->comments_sys->PrintComment($_GDB->SelectRow('SELECT * FROM `comments` WHERE `id` = ?', $id));
+						
+						$this->AJAXShow = true;
+					}
+				}
+
+				break;
+			}
+
+			case 'trainer_profile':
+			{
+				$this->view = '404.php';
+				
+				$id = (int)$this->GetQuery('id');
+
+				if ($id !== false)
+				{
+					$this->trainer_profile_sys = $this->LoadModel('trainer_profile');
+					$this->comments_sys = $this->LoadModel('comments');
+					$this->comments_sys->user_auth = $this->user_auth;
+					$this->DATA['profile'] = $this->trainer_profile_sys->GetProfile($id);
+					$this->DATA['profile']['full_name'] = $this->DATA['profile']['first_name'].' '.$this->DATA['profile']['nickname'].' '.$this->DATA['profile']['last_name'];
+
+					$this->page_name = $this->DATA['profile']['full_name'];
+
+					if ($this->DATA['profile'] !== null) {
+						$this->view = 'ds_trainer_profile.php';
+					}
+				}
+
+				break;
+			}
+
+			case 'feedback':
+			{
+				$this->AJAXShow = false;
+				$this->onShowData = true;
+				$this->showData = $_GText['message_success_feedback'];
+
+				$this->AJAXShow = true;
+
+				break;
+			}
+		}  
+
+		if ($this->onAJAX)
+		{
+			//
+			// AJAX
+			//
+
+			$this->AJAXShow = true;
+		}
+		else
+		{
+			//$this->user_auth = $this->LoadModel('steam_auth');
+			
+			//
+			// NO AJAX
+			//
+
+			// switch ($this->GetQuery('mod'))
+			// {
+			// 	case 'blog':
+			// 	{
+					
+
+			// 		break;
+			// 	}
+
+			// 	case 'trainer_profile':
+			// 	{
+			// 		$this->view = '404.php';	
+			// 		$id = (int)$this->GetQuery('id');
+
+			// 		if ($id !== false)
+			// 		{
+			// 			$this->trainer_profile_sys = $this->LoadModel('trainer_profile');
+			// 			$this->DATA['profile'] = $this->trainer_profile_sys->GetProfile($id);
+
+			// 			if ($this->DATA['profile'] !== null) {
+			// 				$this->view = 'ds_trainer_profile.php';
+			// 			}
+			// 		}
+
+			// 		break;
+			// 	}
+
+			// 	default:
+			// 	{
+			// 		$this->user_auth = $this->LoadModel('steam_auth');
+
+			// 		$this->page_name = 'Главная';     
+			// 		$this->view = 'ds_index.php';
+
+			// 		$this->blog_sys = $this->LoadModel('blog');
+
+			// 		break;
+			// 	}
+			// } 
+
+			// END
+		}
+	}
 }

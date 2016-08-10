@@ -35,7 +35,8 @@ gulp.task('styles', function() {
 	return gulp.src(DEXbaseDir + '/sass/*.sass')
 		.pipe(sass({
 			includePaths: require('node-bourbon').includePaths
-		}).on('error', sass.logError))
+		})
+		.on('error', sass.logError))
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(autoprefixer({browsers: ['last 15 versions'], cascade: false}))
 		//.pipe(cleanCSS())
@@ -44,12 +45,13 @@ gulp.task('styles', function() {
 
 gulp.task('scripts', function() {
 	return gulp.src([
-			DEXbaseDir + '/libs/jquery/dist/jquery.js',
 			DEXbaseDir + '/libs/bootstrap/dist/js/bootstrap.js',
 			DEXbaseDir + '/libs/superfish/dist/js/superfish.js',
 			DEXbaseDir + '/libs/owl.carousel/dist/owl.carousel.js',
-			DEXbaseDir + '/libs/nanoscroller/bin/javascripts/jquery.nanoscroller.js'
-			// DEXbaseDir + '/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
+			DEXbaseDir + '/libs/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
+			DEXbaseDir + '/libs/jquery-form-styler/jquery.formstyler.js',
+			DEXbaseDir + '/libs/magnific-popup/dist/jquery.magnific-popup.js'
+			// DEXbaseDir + '/libs/wysibb/jquery.wysibb.js'
 			// DEXbaseDir + '/libs/jquery-pjax/jquery.pjax.js'
 		])
 		.pipe(concat('libs.min.js'))
@@ -57,37 +59,64 @@ gulp.task('scripts', function() {
 		.pipe(gulp.dest(DEXbaseDir + '/js'));
 });
 
-// gulp.task('browser-sync', ['images', 'styles', 'scripts'], function() {
-// 	browserSync.init({
-// 		server: {
-// 			baseDir: DEXbaseDir
-// 		},
-// 		notify: false
-// 	});
-// });
-
 gulp.task('browser-sync', ['styles', 'scripts'], function() {
 	browserSync.init({
-		proxy: "http://localhost/DreamSchoolProject/app",
+		proxy: 'localhost/DreamSchoolProject/app',
 		notify: false
 	});
 });
 
+// gulp.task('browser-sync', ['styles', 'scripts'], function() {
+// 	browserSync.init({
+// 		proxy: "http://localhost/DreamSchoolProject/app",
+// 		notify: false
+// 	});
+// });
+
 gulp.task('watch', function() {
-	gulp.watch(DEXbaseDir + '/sass/*.sass', ['styles'])
-		.on('change', browserSync.reload);
-		//.on('change', ftp(ftpSetting));
+	// gulp.watch(DEXbaseDir + '/sass/*.sass', ['styles']);
+	// 	//.on('change', browserSync.reload);
+	// 	//.on('change', ftp(ftpSetting));
 
-	gulp.watch(DEXbaseDir + '/libs/**/*.js', ['scripts'])
-		//.on('change', ftp(ftpSetting));
-		.on('change', browserSync.reload);
+	// // gulp.watch(DEXbaseDir + '/libs/**/*.js', ['scripts'])
+	// // 	//.on('change', ftp(ftpSetting));
+	// 	// .on('change', browserSync.reload);
 
-	gulp.watch(DEXbaseDir + '/js/*.js')
-		//.on('change', ftp(ftpSetting));
-		.on('change', browserSync.reload);
+	// gulp.watch(DEXbaseDir + '/js/*.js')
+	// 	//.on('change', ftp(ftpSetting));
+	// 	.on('change', browserSync.reload);
 
-	gulp.watch(DEXbaseDir + '/**/*.php')
-	 	//.on('change', ftp(ftpSetting));
+	// // gulp.watch(DEXbaseDir + '/**/*.php')
+	// //  	//.on('change', ftp(ftpSetting));
+	// //  	.on('change', browserSync.reload);
+
+	//  gulp.watch(DEXbaseDir + '/css/*.css')
+	//  	.on('change', browserSync.reload);
+
+	 // gulp.watch(DEXbaseDir + '/libs/bootstrap/dist/css/*.css', ['styles'])
+	 // 	.on('change', browserSync.reload);
+
+	 gulp.watch(DEXbaseDir + '/sass/*.sass', ['styles']);
+
+	 gulp.watch(DEXbaseDir + '/css/*.css')
+	  	.on('change', browserSync.reload);
+
+	gulp.watch(DEXbaseDir + '/libs/bootstrap/dist/css/*.css', ['styles'])
+	  	.on('change', browserSync.reload);
+
+	 gulp.watch(DEXbaseDir + '/template/**/*.php')
+	 	.on('change', browserSync.reload);
+
+	 gulp.watch(DEXbaseDir + '/view/*.php')
+	 	.on('change', browserSync.reload);
+
+	 gulp.watch(DEXbaseDir + '/model/*.php')
+	 	.on('change', browserSync.reload);
+
+	 gulp.watch(DEXbaseDir + '/controller/*.php')
+	 	.on('change', browserSync.reload);
+
+	 gulp.watch(DEXbaseDir + '/js/*.js')
 	 	.on('change', browserSync.reload);
 });
 

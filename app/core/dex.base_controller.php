@@ -83,6 +83,8 @@ abstract class DEXBaseController
     protected $onAJAX = false;
     protected $AJAXShow = false;   
     protected $err_404 = false;
+    protected $onShowData = false;
+    protected $showData = '';
 
     protected $view = '';
     protected $template = '';
@@ -118,6 +120,14 @@ abstract class DEXBaseController
     public function View()
     {
         return $this->view;
+    }
+
+    public function ShowView()
+    {
+        if (!$this->onAJAX)
+        {
+            include $this->view;
+        }
     }
     
     public function LoadView()
@@ -206,6 +216,10 @@ abstract class DEXBaseController
             $this->Run();
             $this->LoadView();
 
+            if ($this->onShowData) {
+                echo $this->showData;
+            }
+
             if ($this->AJAXShow && !$this->err_404)
             {
                 include_once $this->view;
@@ -214,7 +228,7 @@ abstract class DEXBaseController
             return;
         }
 
-        $this->Run(); 
+        $this->Run();
         $this->LoadView();
 
         include_once $this->Template();
@@ -227,8 +241,13 @@ abstract class DEXBaseController
 
         for ($id = 0; $id < count($args); $id++)
         {
-            if (isset($_GET[$args[$id]])) {
+            if (isset($_GET[$args[$id]]))
+            {
                 $return_array[$args[$id]] = $_GET[$args[$id]];
+            }
+            else if (isset($_POST[$args[$id]]))
+            {
+                $return_array[$args[$id]] = $_POST[$args[$id]];
             }
         }
 

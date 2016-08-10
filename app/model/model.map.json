@@ -19,6 +19,18 @@
 		"class_name": "DEXBlogModel",
 		"file_name": "dex.blog.php"
 	},
+	"trainer_profile": {
+		"class_name": "DSTrainerProfile",
+		"file_name": "ds.trainer_profile.php"
+	},
+	"comments": {
+		"class_name": "DEXComments",
+		"file_name": "dex.comments.php"
+	},
+	"youtube": {
+		"class_name": "DEXYouTube",
+		"file_name": "dex.youtube.php"
+	},
 	"index": {
 		"class_name": "DEXIndexModel",
 		"file_name": "dex.index.php"
