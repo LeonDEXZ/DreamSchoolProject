@@ -135,6 +135,9 @@ gulp.task('build', ['clean', 'libs-i', 'styles', 'scripts'], function() {
 	])
 	.pipe(gulp.dest(DEXdistDir));
 
+	gulp.src(DEXbaseDir + '/installer/*')
+		.pipe(gulp.dest(DEXdistDir + '/installer'));
+
 	gulp.src(DEXbaseDir + '/.htaccess')
 		.pipe(gulp.dest(DEXdistDir));
 
