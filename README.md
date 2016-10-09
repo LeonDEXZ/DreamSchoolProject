@@ -1,12 +1,12 @@
 # Dream School Project
 
 ##start command:
-`npm i`
-`(npm i bower -g)`
-`bower i`
-`gulp build`
+* `npm i`
+* `(npm i bower -g)`
+* `bower i`
+* `gulp build`\n
 
 ##Install site
-<http::\\HOST\installer\index.php>
-Site dir = HOST
-<http::\\HOST\index.php>
+* <http:://HOST/installer/index.php>
+* Site dir = HOST
+* <http:://HOST/index.php>
